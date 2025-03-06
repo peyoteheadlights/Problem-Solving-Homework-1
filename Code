@@ -1,0 +1,61 @@
+#include <stdio.h>
+
+
+
+int main(){
+    int Total, MenuChoice, Search;
+
+    printf("Enter the number of Employees:\n");
+    scanf("%d", &Total);
+
+    char names[Total][100];
+    int IDs[Total];
+    float salaries[Total];
+
+    while (1) {
+        printf("\nMenu:\n1. Store employee data\n2. Search employee by ID\n3. Exit\n");
+        printf("Enter your choice: ");
+        scanf("%d", &MenuChoice);
+
+        if (MenuChoice == 1) {
+            for (int i = 0; i < Total; i++) {
+                printf("\nEmployee %d:\n", i + 1);
+                printf("ID: "); scanf("%d", &IDs[i]);
+                printf("Name: "); scanf(" %[^\n]", names[i]);
+                printf("Salary: "); scanf("%f", &salaries[i]);
+
+
+                char returnChoice;
+                printf("\nDo you want to return to the menu? (y/n): ");
+                scanf(" %c", &returnChoice);
+
+                if (returnChoice == 'y' || returnChoice == 'Y') {
+                    break;
+                }
+            }
+        }
+        else if (MenuChoice == 2) {
+            printf("Enter Employee ID to search: ");
+            scanf("%d", &Search);
+
+            int found = 0;
+            for (int i = 0; i < Total; i++) {
+                if (IDs[i] == Search) {
+                    printf("Employee Found: %d, %s, %.2f\n", IDs[i], names[i], salaries[i]);
+                    found = 1;
+                    break;
+                }
+            }
+            if (!found) printf("Employee with ID %d not found.\n", Search);
+        }
+        else if (MenuChoice == 3) {
+            printf("Exiting program...\n");
+            break;
+        }
+        else {
+            printf("Invalid choice! Try again.\n");
+        }
+    }
+
+    return 0;
+}
